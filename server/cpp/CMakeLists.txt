@@ -39,6 +39,7 @@ include_directories(
 	${PROJECT_SOURCE_DIR}/deps/win64/include/pthread
 	${PROJECT_SOURCE_DIR}/deps/win64/include/libuv
 	${PROJECT_SOURCE_DIR}/deps/win64/include/glib-2.0
+	${PROJECT_SOURCE_DIR}/deps/win64/include/zlib
 )
 add_executable(mirage_test ${test_src})
 target_link_libraries(mirage_test
@@ -47,6 +48,7 @@ target_link_libraries(mirage_test
 	pthreadVC2.lib
 	libuv.lib
 	glib-2.0.lib
+	zlib.lib
 )
 
 

@@ -35,3 +35,33 @@ TEST_F(UtilsTest, glibTest1)
 	guint32 n = g_random_int();
 	std::cout << "Random : " << n << std::endl;
 }
+
+TEST_F(UtilsTest, zlibTest1)
+{
+	//原始数据 
+	unsigned char pchSrc[] = "xxx....";
+	unsigned long nSrcLen = sizeof(pchSrc);
+
+	//压缩之后的数据 
+	unsigned char achComp[1024];
+	unsigned long nCompLen = 1024;
+
+	//解压缩之后的数据 
+	unsigned char achUncomp[1024];
+	unsigned long nUncompLen = 1024;
+
+	//压缩 
+	compress(achComp, &nCompLen, pchSrc, nSrcLen);
+
+	//解压缩 
+	uncompress(achUncomp, &nUncompLen, achComp, nCompLen);
+
+	//显示原始数据信息 
+	printf("原始数据(%d):\n%s\n\n", nSrcLen, pchSrc);
+
+	//显示压缩之后的数据 
+	printf("压缩数据(%d):\n%s\n\n", nCompLen, achComp);
+
+	//显示解压缩之后的数据 
+	printf("解压数据(%d):\n%s\n\n", nUncompLen, achUncomp);
+}

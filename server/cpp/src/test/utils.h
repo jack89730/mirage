@@ -10,6 +10,7 @@
 #include <pthread.h>
 #include <uv.h>
 #include <glib.h>
+#include <zlib.h>
 
 class UtilsTest : public testing::Test
 {
