@@ -22,7 +22,7 @@ set(mirage_src
 	src/mirage/const.cpp
 )
 link_directories(${PROJECT_SOURCE_DIR}/lib ${PROJECT_BINARY_DIR}/bin)
-include_directories(${PROJECT_SOURCE_DIR}/deps/x64/include)
+include_directories(${PROJECT_SOURCE_DIR}/deps/win64/include)
 add_library(mirage STATIC ${mirage_src})	
 
 # 测试项目
@@ -31,9 +31,9 @@ set(test_src
 	src/test/utils.h
 	src/test/utils.cpp
 )
-link_directories(${PROJECT_SOURCE_DIR}/deps/x64/lib/debug ${PROJECT_BINARY_DIR}/../bin)
+link_directories(${PROJECT_SOURCE_DIR}/deps/win64/lib/debug ${PROJECT_BINARY_DIR}/../bin)
 include_directories(${PROJECT_SOURCE_DIR})
-include_directories(${PROJECT_SOURCE_DIR}/src ${PROJECT_SOURCE_DIR}/deps/x64/include)
+include_directories(${PROJECT_SOURCE_DIR}/src ${PROJECT_SOURCE_DIR}/deps/win64/include)
 add_executable(mirage_test ${test_src})
 target_link_libraries(mirage_test
 	winmm.lib
