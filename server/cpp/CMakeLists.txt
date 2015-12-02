@@ -4,7 +4,7 @@ project(mirage)
 cmake_minimum_required(VERSION 2.6)
 
 # 设置Debug版的编译参数，Windows下只支持Debug版
-set(CMAKE_CXX_FLAGS				"-DWIN32 /MT /EHsc /wd\"4819\"")
+set(CMAKE_CXX_FLAGS				"-DWIN32 -DX64 -DWIN64 /MT /EHsc /wd\"4819\"")
 set(CMAKE_CXX_FLAGS_DEBUG		"/MTd -DDEBUG /ZI /Od")
 
 # 设置Link参数
@@ -38,6 +38,7 @@ add_executable(mirage_test ${test_src})
 target_link_libraries(mirage_test
 	winmm.lib
 	gtest.lib
+	pthreadVC2.lib
 )
 
 
