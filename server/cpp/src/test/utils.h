@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 #include <pthread.h>
 #include <uv.h>
+#include <glib.h>
 
 class UtilsTest : public testing::Test
 {

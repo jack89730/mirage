@@ -29,3 +29,9 @@ TEST_F(UtilsTest, libuvTest1)
 	uv_loop_t *loop = uv_loop_new();
 	uv_run(loop, UV_RUN_DEFAULT);
 }
+
+TEST_F(UtilsTest, glibTest1)
+{
+	guint32 n = g_random_int();
+	std::cout << "Random : " << n << std::endl;
+}
