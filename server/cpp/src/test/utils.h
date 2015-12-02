@@ -8,6 +8,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <pthread.h>
+#include <uv.h>
 
 class UtilsTest : public testing::Test
 {

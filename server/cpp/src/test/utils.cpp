@@ -23,3 +23,9 @@ void* UtilsTest::thread1(void* Param)
 	std::cout << "Thread ID : " << myid.p << std::endl;
 	return NULL;
 }
+
+TEST_F(UtilsTest, libuvTest1)
+{
+	uv_loop_t *loop = uv_loop_new();
+	uv_run(loop, UV_RUN_DEFAULT);
+}
