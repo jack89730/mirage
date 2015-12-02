@@ -1,4 +1,4 @@
-project(fmmw)
+project(mirage)
 
 # 版本检查
 cmake_minimum_required(VERSION 2.6)
@@ -16,16 +16,20 @@ set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /SAFESEH:NO")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
-# FMMW部分的代码
-set(fmmw_src
-	src/fmmw/main.cpp
+# Mirage部分的代码
+set(mirage_src
+	src/mirage/const.h
+	src/mirage/const.cpp
 )
 link_directories(${PROJECT_SOURCE_DIR}/lib ${PROJECT_BINARY_DIR}/bin)
-add_executable(fmmw ${fmmw_src})	
+include_directories(${PROJECT_SOURCE_DIR}/deps/x64/include)
+add_library(mirage STATIC ${mirage_src})	
 
 # 测试项目
 set(test_src
 	src/test/main.cpp
+	src/test/utils.h
+	src/test/utils.cpp
 )
 link_directories(${PROJECT_SOURCE_DIR}/deps/x64/lib/debug ${PROJECT_BINARY_DIR}/../bin)
 include_directories(${PROJECT_SOURCE_DIR})
