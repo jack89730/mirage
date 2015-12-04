@@ -3,9 +3,16 @@ project(mirage)
 # 版本检查
 cmake_minimum_required(VERSION 2.6)
 
-# 设置Debug版的编译参数，Windows下只支持Debug版
-set(CMAKE_CXX_FLAGS				"-DWIN -DX64 -DWIN64 /MT /EHsc /wd\"4819\"")
-set(CMAKE_CXX_FLAGS_DEBUG		"/MTd -DDEBUG /ZI /Od")
+if(WIN32)
+	# Windows下的编译参数，64位，Windows下只支持Debug版的编译
+	set(CMAKE_CXX_FLAGS				"-DWIN32 -DWIN64 /MT /EHsc /wd\"4819\"")
+	set(CMAKE_CXX_FLAGS_DEBUG		"/MTd -DDEBUG /ZI /Od")
+	set(type win64)
+else()
+	set(CMAKE_CXX_FLAGS				"-DLINUX -fPIC -std=c++0x -g -O2 -Wall -pipe")
+	set(CMAKE_CXX_FLAGS_DEBUG		"-fPIC -std=c++0x -DDEBUG")
+	set(type linux)
+endif()
 
 # 设置Link参数
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
