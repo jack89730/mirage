@@ -1,8 +1,9 @@
 #ifndef MIRAGE_TEST_UTILES
 #define MIRAGE_TEST_UTILES
 
-#ifdef WIN64
+#ifdef WIN
 #define HAVE_STRUCT_TIMESPEC
+#include <vld.h>
 #endif
 
 #include <iostream>
@@ -15,7 +16,8 @@
 class UtilsTest : public testing::Test
 {
 public:
-	static void* thread1(void* Param);
+	static void* thread1(void *Param);
+	static void* thread2(void *Param);
 };
 
 #endif

@@ -4,7 +4,7 @@ project(mirage)
 cmake_minimum_required(VERSION 2.6)
 
 # 设置Debug版的编译参数，Windows下只支持Debug版
-set(CMAKE_CXX_FLAGS				"-DWIN32 -DX64 -DWIN64 /MT /EHsc /wd\"4819\"")
+set(CMAKE_CXX_FLAGS				"-DWIN -DX64 -DWIN64 /MT /EHsc /wd\"4819\"")
 set(CMAKE_CXX_FLAGS_DEBUG		"/MTd -DDEBUG /ZI /Od")
 
 # 设置Link参数
@@ -40,6 +40,7 @@ include_directories(
 	${PROJECT_SOURCE_DIR}/deps/win64/include/libuv
 	${PROJECT_SOURCE_DIR}/deps/win64/include/glib-2.0
 	${PROJECT_SOURCE_DIR}/deps/win64/include/zlib
+	${PROJECT_SOURCE_DIR}/deps/win64/include/vld
 )
 add_executable(mirage_test ${test_src})
 target_link_libraries(mirage_test
@@ -49,6 +50,7 @@ target_link_libraries(mirage_test
 	libuv.lib
 	glib-2.0.lib
 	zlib.lib
+	vld.lib
 )
 
 
