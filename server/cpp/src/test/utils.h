@@ -3,6 +3,7 @@
 
 #ifdef WIN32
 #define HAVE_STRUCT_TIMESPEC
+#include <vld.h>
 #endif
 
 #include <iostream>
@@ -19,7 +20,8 @@
 class UtilsTest : public testing::Test
 {
 public:
-	static void* thread1(void* Param);
+	static void* thread1(void *Param);
+	static void* thread2(void *Param);
 };
 
 #endif

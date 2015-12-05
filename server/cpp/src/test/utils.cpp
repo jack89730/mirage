@@ -2,17 +2,18 @@
 
 TEST_F(UtilsTest, threadTest1)
 {
-	pthread_t pid;
+	pthread_t pid1, pid2, pid3;
+	void *r1, *r2, *r3;
+
 	pthread_attr_t attr;
 	pthread_attr_init(&attr);
 	pthread_attr_setscope(&attr, PTHREAD_SCOPE_PROCESS);
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-	pthread_create(&pid, &attr, UtilsTest::thread1, NULL);
-	pthread_create(&pid, &attr, UtilsTest::thread1, NULL);
-	pthread_create(&pid, &attr, UtilsTest::thread1, NULL);
-
-	getchar();
-
+	{
+		pthread_create(&pid1, NULL, UtilsTest::thread1, NULL);
+		pthread_create(&pid2, NULL, UtilsTest::thread1, NULL);
+		pthread_create(&pid3, NULL, UtilsTest::thread1, NULL);
+	}
 	pthread_attr_destroy(&attr);
 }
 
@@ -20,14 +21,30 @@ TEST_F(UtilsTest, threadTest1)
 void* UtilsTest::thread1(void* Param)
 {
 	pthread_t myid = pthread_self();
-	std::cout << "Thread ID : " << myid.p << std::endl;
+
+	for (int i = 0; i < 100; ++i)
+	{
+		std::cout << "Thread ID : " << myid.p << std::endl;
+	}
+	
+	return NULL;
+}
+
+void* UtilsTest::thread2(void *Param)
+{
 	return NULL;
 }
 
 TEST_F(UtilsTest, libuvTest1)
 {
-	uv_loop_t *loop = uv_loop_new();
+	uv_loop_t *loop = (uv_loop_t*)malloc(sizeof(uv_loop_t));
+	uv_loop_init(loop);
+
+	printf("Now quitting.\n");
 	uv_run(loop, UV_RUN_DEFAULT);
+
+	uv_loop_close(loop);
+	//free(loop);
 }
 
 TEST_F(UtilsTest, glibTest1)
@@ -39,7 +56,7 @@ TEST_F(UtilsTest, glibTest1)
 TEST_F(UtilsTest, zlibTest1)
 {
 	//原始数据 
-	unsigned char pchSrc[] = "xxx....";
+	unsigned char pchSrc[] = "和小说里写的一样，在我背着行囊第一次来到北京的那天，就彻底迷失了方向。";
 	unsigned long nSrcLen = sizeof(pchSrc);
 
 	//压缩之后的数据 
