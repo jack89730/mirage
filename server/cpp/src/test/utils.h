@@ -1,7 +1,7 @@
 #ifndef MIRAGE_TEST_UTILES
 #define MIRAGE_TEST_UTILES
 
-#ifdef WIN64
+#ifdef WIN32
 #define HAVE_STRUCT_TIMESPEC
 #endif
 
@@ -11,6 +11,10 @@
 #include <uv.h>
 #include <glib.h>
 #include <zlib.h>
+
+#include <mono/jit/jit.h>
+#include <mono/metadata/assembly.h>
+#include <mono/metadata/debug-helpers.h>
 
 class UtilsTest : public testing::Test
 {

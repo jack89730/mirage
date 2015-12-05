@@ -1,11 +1,14 @@
+# Mirage的编译脚本
+# 支持的两个版本为：Windows下32位Debug版、Linux下64位GCC编译版
 project(mirage)
 
 # 版本检查
 cmake_minimum_required(VERSION 2.6)
 
 # 设置Debug版的编译参数，Windows下只支持Debug版
-set(CMAKE_CXX_FLAGS				"-DWIN32 -DX64 -DWIN64 /MT /EHsc /wd\"4819\"")
+set(CMAKE_CXX_FLAGS				"-DWIN32 /MT /EHsc /wd\"4819\"")
 set(CMAKE_CXX_FLAGS_DEBUG		"/MTd -DDEBUG /ZI /Od")
+set(type "win32")
 
 # 设置Link参数
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
@@ -22,7 +25,7 @@ set(mirage_src
 	src/mirage/const.cpp
 )
 link_directories(${PROJECT_SOURCE_DIR}/lib ${PROJECT_BINARY_DIR}/bin)
-include_directories(${PROJECT_SOURCE_DIR}/deps/win64/include)
+include_directories(${PROJECT_SOURCE_DIR}/deps/${type}/include)
 add_library(mirage STATIC ${mirage_src})	
 
 # 测试项目
@@ -31,24 +34,25 @@ set(test_src
 	src/test/utils.h
 	src/test/utils.cpp
 )
-link_directories(${PROJECT_SOURCE_DIR}/deps/win64/lib/debug ${PROJECT_BINARY_DIR}/../bin)
+link_directories(${PROJECT_SOURCE_DIR}/deps/${type}/lib ${PROJECT_BINARY_DIR}/../bin)
 include_directories(
 	${PROJECT_SOURCE_DIR} 
 	${PROJECT_SOURCE_DIR}/src
-	${PROJECT_SOURCE_DIR}/deps/win64/include
-	${PROJECT_SOURCE_DIR}/deps/win64/include/pthread
-	${PROJECT_SOURCE_DIR}/deps/win64/include/libuv
-	${PROJECT_SOURCE_DIR}/deps/win64/include/glib-2.0
-	${PROJECT_SOURCE_DIR}/deps/win64/include/zlib
+	${PROJECT_SOURCE_DIR}/deps/${type}/include
 )
 add_executable(mirage_test ${test_src})
 target_link_libraries(mirage_test
 	winmm.lib
+	ws2_32.lib
+	IPHLPAPI.lib
+	psapi.lib
+	UserEnv.Lib
 	gtest.lib
 	pthreadVC2.lib
 	libuv.lib
 	glib-2.0.lib
 	zlib.lib
+	mono-2.0
 )
 
 

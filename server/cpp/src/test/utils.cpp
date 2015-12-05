@@ -65,3 +65,8 @@ TEST_F(UtilsTest, zlibTest1)
 	//显示解压缩之后的数据 
 	printf("解压数据(%d):\n%s\n\n", nUncompLen, achUncomp);
 }
+
+TEST_F(UtilsTest, Mono1)
+{
+	mono_set_dirs("C:\\Program Files (x86)\\Mono-3.2.3\\lib", "C:\\Program Files (x86)\\Mono-3.2.3\\etc");
+}
