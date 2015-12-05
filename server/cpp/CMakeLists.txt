@@ -51,7 +51,7 @@ target_link_libraries(mirage_test
 	winmm.lib
 	ws2_32.lib
 	IPHLPAPI.lib
-	psapi.lib
+	Psapi.lib
 	UserEnv.Lib
 	gtest.lib
 	pthreadVC2.lib
